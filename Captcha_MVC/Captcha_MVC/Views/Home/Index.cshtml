@@ -1,0 +1,47 @@
+﻿@model Captcha_MVC.Models.RegistrationModel
+@using CaptchaMvc.HtmlHelpers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "fromCaptcha" }))
+{
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserPassword, new { @class = "control-label" })
+                @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                @*Html.MathCaptcha()    MATH CAPTCHA*@
+                @*@Html.Captcha(4)      TEXT CAPTCHA  *@
+                @Html.Captcha("Try Another", "Enter the Text You See Above", 5, "Is Required Field", true)     @* TEXT CAPTCHA  *@
+                <p class="text-danger">@ViewBag.ErrorMessage</p>
+            </div>
+                </div>
+
+                <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+
+            </div>
+        }
